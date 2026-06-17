@@ -13,6 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject private var appState: AppState
     @ObservedObject private var settings: AppSettings
     @State private var usedBytes: Int = 0
+    @State private var launchAtLogin: Bool = LaunchAtLogin.isEnabled
 
     init(settings: AppSettings) {
         self._settings = ObservedObject(wrappedValue: settings)
@@ -51,6 +52,11 @@ struct SettingsView: View {
             }
 
             Section {
+                Toggle("开机时自动启动", isOn: $launchAtLogin)
+                    .onChange(of: launchAtLogin) { newValue in setLaunchAtLogin(newValue) }
+            }
+
+            Section {
                 Toggle("保存图片到本地文件夹", isOn: $settings.saveImages)
                 Toggle("保存文本到本地文件夹", isOn: $settings.saveText)
             }
@@ -85,6 +91,18 @@ struct SettingsView: View {
         .onAppear { recomputeUsage() }
         .onChange(of: settings.historyLimit) { _ in applyCleanup() }
         .onChange(of: settings.autoCleanDays) { _ in applyCleanup() }
+    }
+
+    private func setLaunchAtLogin(_ enabled: Bool) {
+        do {
+            try LaunchAtLogin.set(enabled)
+        } catch {
+            launchAtLogin = LaunchAtLogin.isEnabled  // 回滚到系统真实状态
+            let alert = NSAlert()
+            alert.messageText = enabled ? "无法开启开机自启动" : "无法关闭开机自启动"
+            alert.informativeText = error.localizedDescription
+            alert.runModal()
+        }
     }
 
     private func applyCleanup() {
