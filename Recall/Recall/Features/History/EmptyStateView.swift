@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KeyboardShortcuts
 
 /// 还没有任何剪贴板记录。
 struct EmptyHistoryView: View {
@@ -21,14 +22,17 @@ struct EmptyHistoryView: View {
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
             }
-            HStack(spacing: 6) {
-                Text("按").font(.system(size: 12)).foregroundStyle(.secondary)
-                keyCap("⌥")
-                Text("+").font(.system(size: 12)).foregroundStyle(.secondary)
-                keyCap("V")
-                Text("随时唤起").font(.system(size: 12)).foregroundStyle(.secondary)
+            // 提示与设置页里配置的唤起快捷键保持一致；未设置则不显示。
+            if let shortcut = KeyboardShortcuts.Name.toggleHistoryPanel.shortcut {
+                HStack(spacing: 6) {
+                    Text("按").font(.system(size: 12)).foregroundStyle(.secondary)
+                    ForEach(Array(shortcut.description.enumerated()), id: \.offset) { _, ch in
+                        keyCap(String(ch))
+                    }
+                    Text("随时唤起").font(.system(size: 12)).foregroundStyle(.secondary)
+                }
+                .padding(.top, 4)
             }
-            .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
