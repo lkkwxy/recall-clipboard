@@ -9,3 +9,6 @@ xcuserdata/
 build/
 DerivedData/
 *.profraw
+
+# 打包产物：DMG 走 GitHub Release，不入库
+dist/
