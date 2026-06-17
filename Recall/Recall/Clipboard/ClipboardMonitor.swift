@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import UniformTypeIdentifiers
 
 final class ClipboardMonitor {
     private let store: ClipboardStore
@@ -60,8 +61,7 @@ final class ClipboardMonitor {
         let bundleID = app?.bundleIdentifier
 
         // 优先级：图片 > 文本（图片复制有时会同时带文件名文本）。
-        if settings.saveImages,
-           let image = pb.readObjects(forClasses: [NSImage.self], options: nil)?.first as? NSImage {
+        if settings.saveImages, let image = readImage(from: pb) {
             store.saveImage(image, sourceApp: sourceApp, bundleID: bundleID)
             onCapture?()
         } else if settings.saveText,
@@ -70,5 +70,27 @@ final class ClipboardMonitor {
             store.saveText(text, sourceApp: sourceApp, bundleID: bundleID)
             onCapture?()
         }
+    }
+
+    /// 从剪贴板读取图片。
+    /// 复制的是文件时（Finder 里 Cmd+C），剪贴板里的位图是文件的通用类型图标而非内容，
+    /// 因此只认图片文件的真实内容，绝不回退去读图标位图（否则连 .txt 等非图片文件的图标也会被存）。
+    /// 只有在完全没有文件 URL 时（截图、从浏览器/预览复制）才读原始位图数据。
+    private func readImage(from pb: NSPasteboard) -> NSImage? {
+        let options: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true]
+        if let urls = pb.readObjects(forClasses: [NSURL.self], options: options) as? [URL], !urls.isEmpty {
+            guard let url = urls.first(where: { isImageFile($0) }) else { return nil }
+            return NSImage(contentsOf: url)
+        }
+        for type in [NSPasteboard.PasteboardType.tiff, .png] {
+            if let data = pb.data(forType: type), let image = NSImage(data: data) {
+                return image
+            }
+        }
+        return nil
+    }
+
+    private func isImageFile(_ url: URL) -> Bool {
+        (try? url.resourceValues(forKeys: [.contentTypeKey]).contentType)?.conforms(to: .image) ?? false
     }
 }
