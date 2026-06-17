@@ -58,8 +58,7 @@ struct SettingsView: View {
             }
 
             Section {
-                Toggle("保存图片到本地文件夹", isOn: $settings.saveImages)
-                Toggle("保存文本到本地文件夹", isOn: $settings.saveText)
+                Toggle("是否保存图片", isOn: $settings.saveImages)
             }
 
             Section {
