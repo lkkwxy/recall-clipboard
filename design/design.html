@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:#d3d3d8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</helmet>
+
+<div style="min-width:1640px;padding:52px 56px 80px;display:flex;flex-direction:column;gap:64px;background:#d3d3d8;color:#1c1c1e;">
+
+  <!-- ============ BOARD HEADER / DESIGN SYSTEM ============ -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;max-width:1500px;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#7a7a80;">macOS Utility · 界面设计</span>
+      <span style="font-size:34px;font-weight:700;letter-spacing:-0.02em;color:#1c1c1e;">剪贴板管理工具</span>
+      <span style="font-size:15px;color:#6e6e73;max-width:560px;line-height:1.5;">自动保存复制的文本与图片到本地文件夹，并提供浏览与搜索。5 个页面 · 浅色 / 深色双版本 · 参考 Raycast、Paste、Things 的克制与呼吸感。</span>
+    </div>
+    <div style="display:flex;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:#ffffff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);min-width:150px;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9a9aa0;">强调色</span>
+        <div style="display:flex;align-items:center;gap:9px;"><span style="width:18px;height:18px;border-radius:5px;background:#007AFF;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.1);"></span><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#3c3c43;">#007AFF</span></div>
+        <div style="display:flex;align-items:center;gap:9px;"><span style="width:18px;height:18px;border-radius:5px;background:#0A84FF;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.1);"></span><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#3c3c43;">#0A84FF · 深色</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:#ffffff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);min-width:170px;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9a9aa0;">字体</span>
+        <span style="font-size:13.5px;color:#1c1c1e;font-weight:600;">SF / 系统字体</span>
+        <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#6e6e73;">SF Mono · 路径/键帽</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:#ffffff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);min-width:140px;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9a9aa0;">唤起</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#ffffff,#eceef1);border:1px solid rgba(0,0,0,0.13);box-shadow:0 1.5px 0 rgba(0,0,0,0.07),inset 0 1px 0 #ffffff;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;color:#3c3c43;">⌥</span>
+          <span style="color:#b5b5ba;font-size:13px;">+</span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#ffffff,#eceef1);border:1px solid rgba(0,0,0,0.13);box-shadow:0 1.5px 0 rgba(0,0,0,0.07),inset 0 1px 0 #ffffff;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;color:#3c3c43;">V</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 1 : MAIN HISTORY PANEL ============ -->
+  <div data-screen-label="Page 1 · 主历史面板" style="display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.04em;color:#fff;background:#1c1c1e;border-radius:7px;padding:4px 10px;">页面 1</span>
+      <span style="font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">主历史面板</span>
+      <span style="font-size:14px;color:#83838a;">全局快捷键唤起的浮层窗口 · 搜索 · 筛选 · 卡片列表</span>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+
+      <!-- ---- 1A LIGHT ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);"></span>浅色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(20,20,50,0.4);background:radial-gradient(130% 130% at 0% 0%,#cfe0ff 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#ffd7ec 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#ddccff 0%,transparent 58%),linear-gradient(135deg,#e9f0ff,#fbeaf4);">
+          <!-- floating panel -->
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(245,245,248,0.7);backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:1px solid rgba(255,255,255,0.55);box-shadow:0 18px 50px -14px rgba(20,20,40,0.35),inset 0 1px 0 rgba(255,255,255,0.65);">
+            <!-- search -->
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.06);box-shadow:inset 0 1px 2px rgba(0,0,0,0.03);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#9a9aa0" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#9a9aa0" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="font-size:14.5px;color:#a3a3a9;">搜索剪贴板历史</span>
+            </div>
+            <!-- filter chips -->
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:600;background:#007AFF;color:#fff;box-shadow:0 1px 2px rgba(0,90,200,0.3);">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.13);color:#3c3c43;cursor:pointer;" style-hover="background:rgba(120,120,128,0.2);">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.13);color:#3c3c43;cursor:pointer;" style-hover="background:rgba(120,120,128,0.2);">图片</span>
+            </div>
+            <!-- list -->
+            <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:5px;padding-right:2px;-webkit-mask-image:linear-gradient(180deg,#000 92%,transparent);">
+              <!-- card: url text -->
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(120,120,128,0.1);">
+                <div style="font-size:13.5px;line-height:1.4;color:#1c1c1e;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">https://developer.apple.com/design/human-interface-guidelines/</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#3aa0ff,#1f6dff);"></span><span style="font-size:11.5px;color:#8a8a90;">Safari · 2 分钟前</span></div>
+              </div>
+              <!-- card: SELECTED code w/ actions -->
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;background:rgba(0,122,255,0.09);border:1px solid #007AFF;cursor:pointer;">
+                <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.5;color:#1c1c1e;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding-right:64px;">const debounce = (fn, ms) =&gt; { let t; return (...a) =&gt; { clearTimeout(t); t = setTimeout(() =&gt; fn(...a), ms); }; };</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#3a7bd5,#1e4e9c);"></span><span style="font-size:11.5px;color:#8a8a90;">VS Code · 8 分钟前</span></div>
+                <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px;">
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,0.92);box-shadow:0 1px 2px rgba(0,0,0,0.14);" title="复制"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#3c3c43" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M3.4 10.4H3a1.5 1.5 0 0 1-1.5-1.5v-6A1.4 1.4 0 0 1 2.9 1.5h6A1.5 1.5 0 0 1 10.4 3v.4" stroke-linecap="round"/></svg></span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,0.92);box-shadow:0 1px 2px rgba(0,0,0,0.14);" title="删除"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#e0533d" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 4h10.8M5.8 4V2.9a1 1 0 0 1 1-1h2.4a1 1 0 0 1 1 1V4M4 4l.6 8.7a1.4 1.4 0 0 0 1.4 1.3h4a1.4 1.4 0 0 0 1.4-1.3L13 4"/></svg></span>
+                </div>
+              </div>
+              <!-- card: image -->
+              <div style="position:relative;display:flex;gap:12px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(120,120,128,0.1);">
+                <div style="position:relative;width:96px;height:60px;border-radius:7px;flex-shrink:0;overflow:hidden;background:repeating-linear-gradient(45deg,#e4e4ea 0 9px,#eeeef3 9px 18px);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);"><span style="position:absolute;top:5px;right:6px;font-size:10px;font-weight:600;color:#fff;background:rgba(0,0,0,0.45);padding:2px 6px;border-radius:5px;">1280 × 720</span></div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:7px;"><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11.5px;color:#a3a3a9;">图片 · PNG</span><div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#9aa0a6,#6c727a);"></span><span style="font-size:11.5px;color:#8a8a90;">截图 · 15 分钟前</span></div></div>
+              </div>
+              <!-- card: address -->
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(120,120,128,0.1);">
+                <div style="font-size:13.5px;line-height:1.4;color:#1c1c1e;">123 Market Street, San Francisco, CA 94103</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#4ad06a,#1f9e4a);"></span><span style="font-size:11.5px;color:#8a8a90;">地图 · 32 分钟前</span></div>
+              </div>
+              <!-- card: image 2 -->
+              <div style="position:relative;display:flex;gap:12px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(120,120,128,0.1);">
+                <div style="position:relative;width:60px;height:60px;border-radius:7px;flex-shrink:0;overflow:hidden;background:repeating-linear-gradient(45deg,#e4e4ea 0 9px,#eeeef3 9px 18px);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);"><span style="position:absolute;top:5px;right:6px;font-size:9.5px;font-weight:600;color:#fff;background:rgba(0,0,0,0.45);padding:2px 5px;border-radius:5px;">800²</span></div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:7px;"><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11.5px;color:#a3a3a9;">图片 · 800 × 800</span><div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#b06ef5,#7a3ad6);"></span><span style="font-size:11.5px;color:#8a8a90;">Figma · 1 小时前</span></div></div>
+              </div>
+            </div>
+            <!-- status bar -->
+            <div style="display:flex;align-items:center;justify-content:space-between;height:38px;margin:0 -13px;padding:0 15px;border-top:1px solid rgba(0,0,0,0.07);">
+              <span style="font-size:12px;color:#8a8a90;">共 128 条记录</span>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7a7a80" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke-linecap="round"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <span style="font-size:11.5px;color:#9a9aa0;max-width:600px;">选中态：蓝色边框 + 右上角「复制 / 删除」（hover 时浮现）。其余卡片可悬停查看高亮态。</span>
+      </div>
+
+      <!-- ---- 1B DARK ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#1c1c1e;"></span>深色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(0,0,0,0.55);background:radial-gradient(130% 130% at 0% 0%,#213a6b 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#5a2350 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#2a1e57 0%,transparent 58%),linear-gradient(135deg,#161a2e,#241526);">
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(38,38,43,0.62);backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);border:1px solid rgba(255,255,255,0.1);box-shadow:0 18px 50px -14px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.08);">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.09);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#8a8a92" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#8a8a92" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="font-size:14.5px;color:#86868c;">搜索剪贴板历史</span>
+            </div>
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:600;background:#0A84FF;color:#fff;">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.09);color:#d1d1d6;cursor:pointer;" style-hover="background:rgba(255,255,255,0.15);">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.09);color:#d1d1d6;cursor:pointer;" style-hover="background:rgba(255,255,255,0.15);">图片</span>
+            </div>
+            <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:5px;padding-right:2px;-webkit-mask-image:linear-gradient(180deg,#000 92%,transparent);">
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(255,255,255,0.06);">
+                <div style="font-size:13.5px;line-height:1.4;color:#f5f5f7;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">https://developer.apple.com/design/human-interface-guidelines/</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#3aa0ff,#1f6dff);"></span><span style="font-size:11.5px;color:#98989f;">Safari · 2 分钟前</span></div>
+              </div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;background:rgba(10,132,255,0.18);border:1px solid #0A84FF;cursor:pointer;">
+                <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.5;color:#f5f5f7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding-right:64px;">const debounce = (fn, ms) =&gt; { let t; return (...a) =&gt; { clearTimeout(t); t = setTimeout(() =&gt; fn(...a), ms); }; };</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#3a7bd5,#1e4e9c);"></span><span style="font-size:11.5px;color:#98989f;">VS Code · 8 分钟前</span></div>
+                <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px;">
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,0.14);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.12);" title="复制"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#e8e8ec" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M3.4 10.4H3a1.5 1.5 0 0 1-1.5-1.5v-6A1.4 1.4 0 0 1 2.9 1.5h6A1.5 1.5 0 0 1 10.4 3v.4" stroke-linecap="round"/></svg></span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,0.14);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.12);" title="删除"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#ff6f5e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 4h10.8M5.8 4V2.9a1 1 0 0 1 1-1h2.4a1 1 0 0 1 1 1V4M4 4l.6 8.7a1.4 1.4 0 0 0 1.4 1.3h4a1.4 1.4 0 0 0 1.4-1.3L13 4"/></svg></span>
+                </div>
+              </div>
+              <div style="position:relative;display:flex;gap:12px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(255,255,255,0.06);">
+                <div style="position:relative;width:96px;height:60px;border-radius:7px;flex-shrink:0;overflow:hidden;background:repeating-linear-gradient(45deg,#34343a 0 9px,#3d3d44 9px 18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);"><span style="position:absolute;top:5px;right:6px;font-size:10px;font-weight:600;color:#fff;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:5px;">1280 × 720</span></div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:7px;"><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11.5px;color:#7e7e86;">图片 · PNG</span><div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#9aa0a6,#6c727a);"></span><span style="font-size:11.5px;color:#98989f;">截图 · 15 分钟前</span></div></div>
+              </div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(255,255,255,0.06);">
+                <div style="font-size:13.5px;line-height:1.4;color:#f5f5f7;">123 Market Street, San Francisco, CA 94103</div>
+                <div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#4ad06a,#1f9e4a);"></span><span style="font-size:11.5px;color:#98989f;">地图 · 32 分钟前</span></div>
+              </div>
+              <div style="position:relative;display:flex;gap:12px;padding:12px 13px;border-radius:11px;border:1px solid transparent;cursor:pointer;" style-hover="background:rgba(255,255,255,0.06);">
+                <div style="position:relative;width:60px;height:60px;border-radius:7px;flex-shrink:0;overflow:hidden;background:repeating-linear-gradient(45deg,#34343a 0 9px,#3d3d44 9px 18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);"><span style="position:absolute;top:5px;right:6px;font-size:9.5px;font-weight:600;color:#fff;background:rgba(0,0,0,0.5);padding:2px 5px;border-radius:5px;">800²</span></div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:7px;"><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11.5px;color:#7e7e86;">图片 · 800 × 800</span><div style="display:flex;align-items:center;gap:7px;"><span style="width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#b06ef5,#7a3ad6);"></span><span style="font-size:11.5px;color:#98989f;">Figma · 1 小时前</span></div></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;height:38px;margin:0 -13px;padding:0 15px;border-top:1px solid rgba(255,255,255,0.08);">
+              <span style="font-size:12px;color:#98989f;">共 128 条记录</span>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.1);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke-linecap="round"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <span style="font-size:11.5px;color:#9a9aa0;max-width:600px;">深色版毛玻璃透出背景色调；强调色提亮为 #0A84FF。</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PAGE 2 : SETTINGS WINDOW ============ -->
+  <div data-screen-label="Page 2 · 设置窗口" style="display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.04em;color:#fff;background:#1c1c1e;border-radius:7px;padding:4px 10px;">页面 2</span>
+      <span style="font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">设置窗口 · 通用</span>
+      <span style="font-size:14px;color:#83838a;">标准 macOS 系统设置风格 · 交通灯 · 分组导航 · 本地文件夹配置</span>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+
+      <!-- ---- 2A LIGHT ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);"></span>浅色</span>
+        <div style="display:flex;width:740px;height:512px;border-radius:12px;overflow:hidden;background:#f5f5f7;box-shadow:0 24px 60px -18px rgba(20,20,50,0.4),0 0 0 0.5px rgba(0,0,0,0.12);">
+          <!-- sidebar -->
+          <div style="width:202px;flex-shrink:0;display:flex;flex-direction:column;background:#e9e9ee;border-right:0.5px solid rgba(0,0,0,0.1);">
+            <div style="display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;">
+              <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.15);"></span>
+              <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.15);"></span>
+              <span style="width:12px;height:12px;border-radius:50%;background:#28c840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,0.15);"></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px;padding:6px 10px;">
+              <div style="display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;border-radius:7px;background:#007AFF;box-shadow:0 1px 2px rgba(0,90,200,0.3);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke-linecap="round"/></svg><span style="font-size:13.5px;font-weight:600;color:#fff;">通用</span></div>
+            </div>
+          </div>
+          <!-- content -->
+          <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+            <div style="display:flex;align-items:center;height:52px;padding:0 24px;border-bottom:0.5px solid rgba(0,0,0,0.07);"><span style="font-size:20px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">通用</span></div>
+            <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:16px;padding:18px 24px;">
+              <!-- group: location -->
+              <div style="background:#fff;border-radius:11px;box-shadow:0 1px 2px rgba(0,0,0,0.06),0 0 0 0.5px rgba(0,0,0,0.04);">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px;padding:11px 16px;">
+                  <div style="display:flex;flex-direction:column;gap:3px;min-width:0;"><span style="font-size:13.5px;color:#1c1c1e;">保存位置</span><span style="font-size:11.5px;color:#8a8a90;">新复制的内容会保存到此文件夹</span></div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                    <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 11px;border-radius:7px;background:#f0f0f2;max-width:210px;"><svg width="15" height="15" viewBox="0 0 16 16" fill="#007AFF"><path d="M1.5 4.6a1.6 1.6 0 0 1 1.6-1.6h2.6l1.3 1.5H13a1.5 1.5 0 0 1 1.5 1.5v5.4A1.6 1.6 0 0 1 12.9 13H3.1a1.6 1.6 0 0 1-1.6-1.6z"/></svg><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#3c3c43;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">~/Documents/ClipboardData</span></span>
+                    <span style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:7px;background:linear-gradient(#ffffff,#f3f3f5);border:0.5px solid rgba(0,0,0,0.18);box-shadow:0 1px 1.5px rgba(0,0,0,0.07);font-size:12.5px;color:#1c1c1e;cursor:pointer;">更改…</span>
+                  </div>
+                </div>
+              </div>
+              <!-- group: toggles -->
+              <div style="background:#fff;border-radius:11px;box-shadow:0 1px 2px rgba(0,0,0,0.06),0 0 0 0.5px rgba(0,0,0,0.04);">
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#1c1c1e;">保存图片到本地文件夹</span><span style="position:relative;width:38px;height:22px;border-radius:11px;background:#34c759;"><span style="position:absolute;top:2px;left:18px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.25);"></span></span></div>
+                <div style="height:0.5px;background:rgba(0,0,0,0.08);margin-left:16px;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#1c1c1e;">保存文本到本地文件夹</span><span style="position:relative;width:38px;height:22px;border-radius:11px;background:#34c759;"><span style="position:absolute;top:2px;left:18px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.25);"></span></span></div>
+              </div>
+              <!-- group: dropdowns -->
+              <div style="background:#fff;border-radius:11px;box-shadow:0 1px 2px rgba(0,0,0,0.06),0 0 0 0.5px rgba(0,0,0,0.04);">
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#1c1c1e;">历史上限</span><span style="display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 4px 0 11px;border-radius:7px;background:#fff;border:0.5px solid rgba(0,0,0,0.18);box-shadow:0 1px 1px rgba(0,0,0,0.05);font-size:13px;color:#1c1c1e;cursor:pointer;">最近 500 条<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#007AFF;"><svg width="9" height="13" viewBox="0 0 9 13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 5L4.5 2.6 6.8 5"/><path d="M2.2 8L4.5 10.4 6.8 8"/></svg></span></span></div>
+                <div style="height:0.5px;background:rgba(0,0,0,0.08);margin-left:16px;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:9px 16px;"><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:13.5px;color:#1c1c1e;">自动清理</span><span style="font-size:11.5px;color:#8a8a90;">超期记录将自动删除</span></div><span style="display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 4px 0 11px;border-radius:7px;background:#fff;border:0.5px solid rgba(0,0,0,0.18);box-shadow:0 1px 1px rgba(0,0,0,0.05);font-size:13px;color:#1c1c1e;cursor:pointer;">30 天<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#007AFF;"><svg width="9" height="13" viewBox="0 0 9 13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 5L4.5 2.6 6.8 5"/><path d="M2.2 8L4.5 10.4 6.8 8"/></svg></span></span></div>
+              </div>
+              <!-- group: storage usage -->
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border-radius:11px;box-shadow:0 1px 2px rgba(0,0,0,0.06),0 0 0 0.5px rgba(0,0,0,0.04);padding:13px 16px;">
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;flex:1;"><span style="font-size:13.5px;color:#1c1c1e;">已使用 <span style="font-weight:600;">24.6 MB</span> 本地存储</span><span style="position:relative;width:220px;height:5px;border-radius:3px;background:rgba(120,120,128,0.18);overflow:hidden;"><span style="position:absolute;left:0;top:0;height:100%;width:22%;border-radius:3px;background:#007AFF;"></span></span></div>
+                <span style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:7px;background:linear-gradient(#ffffff,#f3f3f5);border:0.5px solid rgba(0,0,0,0.18);box-shadow:0 1px 1.5px rgba(0,0,0,0.07);font-size:12.5px;color:#1c1c1e;cursor:pointer;flex-shrink:0;">打开文件夹</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 2B DARK ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#1c1c1e;"></span>深色</span>
+        <div style="display:flex;width:740px;height:512px;border-radius:12px;overflow:hidden;background:#1e1e20;box-shadow:0 24px 60px -18px rgba(0,0,0,0.6),0 0 0 0.5px rgba(255,255,255,0.12);">
+          <div style="width:202px;flex-shrink:0;display:flex;flex-direction:column;background:#2a2a2d;border-right:0.5px solid rgba(255,255,255,0.08);">
+            <div style="display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;">
+              <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:12px;height:12px;border-radius:50%;background:#28c840;"></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px;padding:6px 10px;">
+              <div style="display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;border-radius:7px;background:#0A84FF;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke-linecap="round"/></svg><span style="font-size:13.5px;font-weight:600;color:#fff;">通用</span></div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:#1e1e20;">
+            <div style="display:flex;align-items:center;height:52px;padding:0 24px;border-bottom:0.5px solid rgba(255,255,255,0.07);"><span style="font-size:20px;font-weight:700;letter-spacing:-0.01em;color:#f5f5f7;">通用</span></div>
+            <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:16px;padding:18px 24px;">
+              <div style="background:#2c2c2e;border-radius:11px;box-shadow:0 0 0 0.5px rgba(255,255,255,0.05);">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px;padding:11px 16px;">
+                  <div style="display:flex;flex-direction:column;gap:3px;min-width:0;"><span style="font-size:13.5px;color:#f5f5f7;">保存位置</span><span style="font-size:11.5px;color:#98989f;">新复制的内容会保存到此文件夹</span></div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                    <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 11px;border-radius:7px;background:#1c1c1c;max-width:210px;"><svg width="15" height="15" viewBox="0 0 16 16" fill="#0A84FF"><path d="M1.5 4.6a1.6 1.6 0 0 1 1.6-1.6h2.6l1.3 1.5H13a1.5 1.5 0 0 1 1.5 1.5v5.4A1.6 1.6 0 0 1 12.9 13H3.1a1.6 1.6 0 0 1-1.6-1.6z"/></svg><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#d1d1d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">~/Documents/ClipboardData</span></span>
+                    <span style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:7px;background:#3a3a3c;border:0.5px solid rgba(255,255,255,0.12);font-size:12.5px;color:#f5f5f7;cursor:pointer;">更改…</span>
+                  </div>
+                </div>
+              </div>
+              <div style="background:#2c2c2e;border-radius:11px;box-shadow:0 0 0 0.5px rgba(255,255,255,0.05);">
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#f5f5f7;">保存图片到本地文件夹</span><span style="position:relative;width:38px;height:22px;border-radius:11px;background:#30d158;"><span style="position:absolute;top:2px;left:18px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.4);"></span></span></div>
+                <div style="height:0.5px;background:rgba(255,255,255,0.08);margin-left:16px;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#f5f5f7;">保存文本到本地文件夹</span><span style="position:relative;width:38px;height:22px;border-radius:11px;background:#30d158;"><span style="position:absolute;top:2px;left:18px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.4);"></span></span></div>
+              </div>
+              <div style="background:#2c2c2e;border-radius:11px;box-shadow:0 0 0 0.5px rgba(255,255,255,0.05);">
+                <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;"><span style="font-size:13.5px;color:#f5f5f7;">历史上限</span><span style="display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 4px 0 11px;border-radius:7px;background:#3a3a3c;border:0.5px solid rgba(255,255,255,0.1);font-size:13px;color:#f5f5f7;cursor:pointer;">最近 500 条<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#0A84FF;"><svg width="9" height="13" viewBox="0 0 9 13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 5L4.5 2.6 6.8 5"/><path d="M2.2 8L4.5 10.4 6.8 8"/></svg></span></span></div>
+                <div style="height:0.5px;background:rgba(255,255,255,0.08);margin-left:16px;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:9px 16px;"><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:13.5px;color:#f5f5f7;">自动清理</span><span style="font-size:11.5px;color:#98989f;">超期记录将自动删除</span></div><span style="display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 4px 0 11px;border-radius:7px;background:#3a3a3c;border:0.5px solid rgba(255,255,255,0.1);font-size:13px;color:#f5f5f7;cursor:pointer;">30 天<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;background:#0A84FF;"><svg width="9" height="13" viewBox="0 0 9 13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 5L4.5 2.6 6.8 5"/><path d="M2.2 8L4.5 10.4 6.8 8"/></svg></span></span></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#2c2c2e;border-radius:11px;box-shadow:0 0 0 0.5px rgba(255,255,255,0.05);padding:13px 16px;">
+                <div style="display:flex;flex-direction:column;gap:7px;min-width:0;flex:1;"><span style="font-size:13.5px;color:#f5f5f7;">已使用 <span style="font-weight:600;">24.6 MB</span> 本地存储</span><span style="position:relative;width:220px;height:5px;border-radius:3px;background:rgba(255,255,255,0.12);overflow:hidden;"><span style="position:absolute;left:0;top:0;height:100%;width:22%;border-radius:3px;background:#0A84FF;"></span></span></div>
+                <span style="display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:7px;background:#3a3a3c;border:0.5px solid rgba(255,255,255,0.12);font-size:12.5px;color:#f5f5f7;cursor:pointer;flex-shrink:0;">打开文件夹</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PAGE 3 : MENU BAR DROPDOWN ============ -->
+  <div data-screen-label="Page 3 · 菜单栏下拉" style="display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.04em;color:#fff;background:#1c1c1e;border-radius:7px;padding:4px 10px;">页面 3</span>
+      <span style="font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">菜单栏图标与下拉菜单</span>
+      <span style="font-size:14px;color:#83838a;">最近 5 条快速预览 + 菜单项</span>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+
+      <!-- ---- 3A LIGHT ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);"></span>浅色</span>
+        <div style="position:relative;width:420px;height:430px;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(20,20,50,0.4);background:radial-gradient(130% 130% at 0% 0%,#cfe0ff 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#ffd7ec 0%,transparent 50%),linear-gradient(135deg,#e9f0ff,#fbeaf4);">
+          <!-- menu bar -->
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:14px;height:26px;padding:0 12px;background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid rgba(0,0,0,0.06);">
+            <svg width="16" height="12" viewBox="0 0 18 13" fill="#3c3c43"><path d="M9 2.2c2.3 0 4.4.9 6 2.4l1.2-1.3A10.6 10.6 0 0 0 9 .4 10.6 10.6 0 0 0 1.8 3.3L3 4.6A8.6 8.6 0 0 1 9 2.2z" opacity="0.5"/><path d="M9 5.6c1.4 0 2.7.5 3.6 1.5l1.2-1.3A7 7 0 0 0 9 3.8a7 7 0 0 0-4.8 2l1.2 1.3A5 5 0 0 1 9 5.6z" opacity="0.7"/><path d="M9 9c.7 0 1.3.3 1.8.8L9 11.6 7.2 9.8C7.7 9.3 8.3 9 9 9z"/></svg>
+            <span style="position:relative;display:inline-flex;align-items:center;justify-content:center;width:24px;height:20px;border-radius:5px;background:rgba(0,122,255,0.16);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0a66d6" stroke-width="1.7"><rect x="5" y="4" width="14" height="18" rx="2.6"/><path d="M9.5 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z" fill="#0a66d6"/></svg></span>
+            <span style="font-size:12.5px;color:#1c1c1e;font-weight:500;">周一 9:41</span>
+          </div>
+          <!-- dropdown anchored under icon -->
+          <div style="position:absolute;top:32px;right:64px;width:262px;border-radius:11px;padding:6px;background:rgba(247,247,249,0.82);backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:0.5px solid rgba(0,0,0,0.1);box-shadow:0 18px 44px -10px rgba(20,20,40,0.4),inset 0 1px 0 rgba(255,255,255,0.6);">
+            <div style="padding:6px 10px 3px;font-size:11px;font-weight:600;letter-spacing:0.04em;color:#9a9aa0;">最近</div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;background:#007AFF;"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#3aa0ff,#1f6dff);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);"></span><span style="font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">developer.apple.com/design/hig</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#3a7bd5,#1e4e9c);"></span><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#1c1c1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">const debounce = (fn, ms) =&gt; …</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="width:26px;height:18px;border-radius:4px;flex-shrink:0;background:repeating-linear-gradient(45deg,#dcdce2 0 5px,#e8e8ee 5px 10px);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);"></span><span style="font-size:13px;color:#1c1c1e;">图片 · 1280 × 720</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#4ad06a,#1f9e4a);"></span><span style="font-size:13px;color:#1c1c1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">123 Market Street, San Franci…</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:repeating-linear-gradient(45deg,#dcdce2 0 5px,#e8e8ee 5px 10px);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);"></span><span style="font-size:13px;color:#1c1c1e;">图片 · 800 × 800</span></div>
+            <div style="height:0.5px;background:rgba(0,0,0,0.1);margin:5px 8px;"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="font-size:13px;color:#1c1c1e;">打开历史面板</span><span style="display:flex;align-items:center;gap:3px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 3px;border-radius:4px;background:rgba(120,120,128,0.16);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#6e6e73;">⌥</span><span style="display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 3px;border-radius:4px;background:rgba(120,120,128,0.16);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#6e6e73;">V</span></span></div>
+            <div style="display:flex;align-items:center;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="font-size:13px;color:#1c1c1e;">设置…</span></div>
+            <div style="display:flex;align-items:center;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(120,120,128,0.14);"><span style="font-size:13px;color:#1c1c1e;">退出</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 3B DARK ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#1c1c1e;"></span>深色</span>
+        <div style="position:relative;width:420px;height:430px;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(0,0,0,0.6);background:radial-gradient(130% 130% at 0% 0%,#213a6b 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#5a2350 0%,transparent 50%),linear-gradient(135deg,#161a2e,#241526);">
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:14px;height:26px;padding:0 12px;background:rgba(0,0,0,0.32);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid rgba(255,255,255,0.06);">
+            <svg width="16" height="12" viewBox="0 0 18 13" fill="#f5f5f7"><path d="M9 2.2c2.3 0 4.4.9 6 2.4l1.2-1.3A10.6 10.6 0 0 0 9 .4 10.6 10.6 0 0 0 1.8 3.3L3 4.6A8.6 8.6 0 0 1 9 2.2z" opacity="0.5"/><path d="M9 5.6c1.4 0 2.7.5 3.6 1.5l1.2-1.3A7 7 0 0 0 9 3.8a7 7 0 0 0-4.8 2l1.2 1.3A5 5 0 0 1 9 5.6z" opacity="0.7"/><path d="M9 9c.7 0 1.3.3 1.8.8L9 11.6 7.2 9.8C7.7 9.3 8.3 9 9 9z"/></svg>
+            <span style="position:relative;display:inline-flex;align-items:center;justify-content:center;width:24px;height:20px;border-radius:5px;background:rgba(255,255,255,0.18);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f5f5f7" stroke-width="1.7"><rect x="5" y="4" width="14" height="18" rx="2.6"/><path d="M9.5 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z" fill="#f5f5f7"/></svg></span>
+            <span style="font-size:12.5px;color:#f5f5f7;font-weight:500;">周一 9:41</span>
+          </div>
+          <div style="position:absolute;top:32px;right:64px;width:262px;border-radius:11px;padding:6px;background:rgba(42,42,46,0.85);backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);border:0.5px solid rgba(255,255,255,0.1);box-shadow:0 18px 44px -10px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.08);">
+            <div style="padding:6px 10px 3px;font-size:11px;font-weight:600;letter-spacing:0.04em;color:#86868c;">最近</div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;background:#0A84FF;"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#3aa0ff,#1f6dff);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);"></span><span style="font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">developer.apple.com/design/hig</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#3a7bd5,#1e4e9c);"></span><span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#f5f5f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">const debounce = (fn, ms) =&gt; …</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="width:26px;height:18px;border-radius:4px;flex-shrink:0;background:repeating-linear-gradient(45deg,#3a3a40 0 5px,#45454c 5px 10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);"></span><span style="font-size:13px;color:#f5f5f7;">图片 · 1280 × 720</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:linear-gradient(135deg,#4ad06a,#1f9e4a);"></span><span style="font-size:13px;color:#f5f5f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">123 Market Street, San Franci…</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="width:18px;height:18px;border-radius:4px;flex-shrink:0;background:repeating-linear-gradient(45deg,#3a3a40 0 5px,#45454c 5px 10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);"></span><span style="font-size:13px;color:#f5f5f7;">图片 · 800 × 800</span></div>
+            <div style="height:0.5px;background:rgba(255,255,255,0.1);margin:5px 8px;"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="font-size:13px;color:#f5f5f7;">打开历史面板</span><span style="display:flex;align-items:center;gap:3px;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 3px;border-radius:4px;background:rgba(255,255,255,0.12);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#b5b5ba;">⌥</span><span style="display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 3px;border-radius:4px;background:rgba(255,255,255,0.12);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#b5b5ba;">V</span></span></div>
+            <div style="display:flex;align-items:center;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="font-size:13px;color:#f5f5f7;">设置…</span></div>
+            <div style="display:flex;align-items:center;height:30px;padding:0 9px;border-radius:6px;cursor:pointer;" style-hover="background:rgba(255,255,255,0.08);"><span style="font-size:13px;color:#f5f5f7;">退出</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PAGE 4 : EMPTY STATE ============ -->
+  <div data-screen-label="Page 4 · 空状态" style="display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.04em;color:#fff;background:#1c1c1e;border-radius:7px;padding:4px 10px;">页面 4</span>
+      <span style="font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">空状态 · 首次打开</span>
+      <span style="font-size:14px;color:#83838a;">无任何记录 · 搜索与筛选禁用 · 承担新手引导</span>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+
+      <!-- ---- 4A LIGHT ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);"></span>浅色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(20,20,50,0.4);background:radial-gradient(130% 130% at 0% 0%,#cfe0ff 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#ffd7ec 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#ddccff 0%,transparent 58%),linear-gradient(135deg,#e9f0ff,#fbeaf4);">
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(245,245,248,0.7);backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:1px solid rgba(255,255,255,0.55);box-shadow:0 18px 50px -14px rgba(20,20,40,0.35),inset 0 1px 0 rgba(255,255,255,0.65);">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(120,120,128,0.08);border:1px solid rgba(0,0,0,0.04);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#c2c2c8" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#c2c2c8" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="font-size:14.5px;color:#bcbcc2;">搜索剪贴板历史</span>
+            </div>
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.09);color:#bcbcc2;">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.09);color:#bcbcc2;">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.09);color:#bcbcc2;">图片</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding-bottom:34px;">
+              <div style="position:relative;width:150px;height:122px;margin-bottom:26px;">
+                <div style="position:absolute;left:16px;top:18px;width:76px;height:96px;border:2px solid #d5d5db;border-radius:12px;background:rgba(255,255,255,0.45);transform:rotate(-9deg);"></div>
+                <div style="position:absolute;left:40px;top:14px;width:76px;height:96px;border:2px solid #cdcdd4;border-radius:12px;background:rgba(255,255,255,0.6);transform:rotate(8deg);"></div>
+                <div style="position:absolute;left:33px;top:10px;width:84px;height:102px;border:2px solid #bcbcc6;border-radius:14px;background:rgba(255,255,255,0.85);display:flex;flex-direction:column;align-items:center;gap:9px;padding-top:26px;">
+                  <span style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:32px;height:11px;border:2px solid #bcbcc6;border-radius:5px;background:#f4f4f6;"></span>
+                  <span style="width:48px;height:5px;border-radius:3px;background:#dcdce2;"></span>
+                  <span style="width:36px;height:5px;border-radius:3px;background:#e2e2e8;"></span>
+                  <span style="width:42px;height:5px;border-radius:3px;background:#e2e2e8;"></span>
+                </div>
+              </div>
+              <span style="font-size:17px;font-weight:600;color:#1c1c1e;">还没有剪贴板记录</span>
+              <span style="font-size:13.5px;color:#8a8a90;max-width:300px;text-align:center;line-height:1.5;margin-top:7px;">复制任意文本或图片，它们会自动出现在这里</span>
+              <div style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:10px 16px;border-radius:11px;background:rgba(120,120,128,0.09);border:0.5px solid rgba(0,0,0,0.04);">
+                <span style="font-size:13px;color:#6e6e73;">按</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#ffffff,#eceef1);border:1px solid rgba(0,0,0,0.13);box-shadow:0 1.5px 0 rgba(0,0,0,0.07),inset 0 1px 0 #ffffff;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;color:#3c3c43;">⌥</span>
+                <span style="color:#b5b5ba;font-size:13px;">+</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#ffffff,#eceef1);border:1px solid rgba(0,0,0,0.13);box-shadow:0 1.5px 0 rgba(0,0,0,0.07),inset 0 1px 0 #ffffff;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;color:#3c3c43;">V</span>
+                <span style="font-size:13px;color:#6e6e73;">随时唤起</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 4B DARK ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#1c1c1e;"></span>深色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(0,0,0,0.55);background:radial-gradient(130% 130% at 0% 0%,#213a6b 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#5a2350 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#2a1e57 0%,transparent 58%),linear-gradient(135deg,#161a2e,#241526);">
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(38,38,43,0.62);backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);border:1px solid rgba(255,255,255,0.1);box-shadow:0 18px 50px -14px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.08);">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.05);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#5a5a62" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#5a5a62" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="font-size:14.5px;color:#5e5e66;">搜索剪贴板历史</span>
+            </div>
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.05);color:#5e5e66;">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.05);color:#5e5e66;">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.05);color:#5e5e66;">图片</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding-bottom:34px;">
+              <div style="position:relative;width:150px;height:122px;margin-bottom:26px;">
+                <div style="position:absolute;left:16px;top:18px;width:76px;height:96px;border:2px solid #46464e;border-radius:12px;background:rgba(255,255,255,0.03);transform:rotate(-9deg);"></div>
+                <div style="position:absolute;left:40px;top:14px;width:76px;height:96px;border:2px solid #4e4e56;border-radius:12px;background:rgba(255,255,255,0.04);transform:rotate(8deg);"></div>
+                <div style="position:absolute;left:33px;top:10px;width:84px;height:102px;border:2px solid #5c5c66;border-radius:14px;background:rgba(255,255,255,0.05);display:flex;flex-direction:column;align-items:center;gap:9px;padding-top:26px;">
+                  <span style="position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:32px;height:11px;border:2px solid #5c5c66;border-radius:5px;background:#34343a;"></span>
+                  <span style="width:48px;height:5px;border-radius:3px;background:#46464e;"></span>
+                  <span style="width:36px;height:5px;border-radius:3px;background:#3e3e46;"></span>
+                  <span style="width:42px;height:5px;border-radius:3px;background:#3e3e46;"></span>
+                </div>
+              </div>
+              <span style="font-size:17px;font-weight:600;color:#f5f5f7;">还没有剪贴板记录</span>
+              <span style="font-size:13.5px;color:#98989f;max-width:300px;text-align:center;line-height:1.5;margin-top:7px;">复制任意文本或图片，它们会自动出现在这里</span>
+              <div style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:10px 16px;border-radius:11px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.06);">
+                <span style="font-size:13px;color:#a0a0a6;">按</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#54545c,#3c3c44);border:1px solid rgba(255,255,255,0.12);box-shadow:0 1.5px 0 rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.12);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;color:#f0f0f2;">⌥</span>
+                <span style="color:#76767e;font-size:13px;">+</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:7px;background:linear-gradient(#54545c,#3c3c44);border:1px solid rgba(255,255,255,0.12);box-shadow:0 1.5px 0 rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.12);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;color:#f0f0f2;">V</span>
+                <span style="font-size:13px;color:#a0a0a6;">随时唤起</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PAGE 5 : SEARCH NO RESULTS ============ -->
+  <div data-screen-label="Page 5 · 搜索无结果" style="display:flex;flex-direction:column;gap:22px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <span style="font-size:13px;font-weight:700;letter-spacing:0.04em;color:#fff;background:#1c1c1e;border-radius:7px;padding:4px 10px;">页面 5</span>
+      <span style="font-size:21px;font-weight:700;letter-spacing:-0.01em;color:#1c1c1e;">搜索无结果</span>
+      <span style="font-size:14px;color:#83838a;">有记录、搜索未命中 · 搜索框可用 · 更克制，无插画</span>
+    </div>
+
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+
+      <!-- ---- 5A LIGHT ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);"></span>浅色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(20,20,50,0.4);background:radial-gradient(130% 130% at 0% 0%,#cfe0ff 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#ffd7ec 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#ddccff 0%,transparent 58%),linear-gradient(135deg,#e9f0ff,#fbeaf4);">
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(245,245,248,0.7);backdrop-filter:blur(34px) saturate(180%);-webkit-backdrop-filter:blur(34px) saturate(180%);border:1px solid rgba(255,255,255,0.55);box-shadow:0 18px 50px -14px rgba(20,20,40,0.35),inset 0 1px 0 rgba(255,255,255,0.65);">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,0.85);border:1px solid #007AFF;box-shadow:0 0 0 3px rgba(0,122,255,0.15);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#8a8a90" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#8a8a90" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="flex:1;font-size:14.5px;color:#1c1c1e;">invoice<span style="display:inline-block;width:1.5px;height:16px;background:#007AFF;margin-left:1px;vertical-align:-3px;"></span></span>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(120,120,128,0.35);cursor:pointer;"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M2.6 2.6l4.8 4.8M7.4 2.6l-4.8 4.8"/></svg></span>
+            </div>
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:600;background:#007AFF;color:#fff;box-shadow:0 1px 2px rgba(0,90,200,0.3);">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.13);color:#3c3c43;cursor:pointer;" style-hover="background:rgba(120,120,128,0.2);">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(120,120,128,0.13);color:#3c3c43;cursor:pointer;" style-hover="background:rgba(120,120,128,0.2);">图片</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding-bottom:34px;">
+              <svg width="46" height="46" viewBox="0 0 48 48" fill="none" stroke="#c2c2c8" stroke-width="2.4" style="margin-bottom:18px;"><circle cx="21" cy="21" r="13"/><line x1="30.5" y1="30.5" x2="40" y2="40" stroke-linecap="round"/><line x1="13.5" y1="28.5" x2="28.5" y2="13.5" stroke-linecap="round"/></svg>
+              <span style="font-size:17px;font-weight:500;color:#6e6e73;">未找到<span style="font-weight:700;color:#007AFF;">「invoice」</span>相关记录</span>
+              <span style="font-size:13.5px;color:#8a8a90;max-width:300px;text-align:center;line-height:1.5;margin-top:7px;">试试更换关键词，或切换到其他筛选类型</span>
+              <span style="font-size:13.5px;font-weight:500;color:#007AFF;margin-top:18px;cursor:pointer;">清除搜索</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- 5B DARK ---- -->
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#83838a;"><span style="width:9px;height:9px;border-radius:50%;background:#1c1c1e;"></span>深色</span>
+        <div style="position:relative;width:660px;height:540px;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(0,0,0,0.55);background:radial-gradient(130% 130% at 0% 0%,#213a6b 0%,transparent 52%),radial-gradient(120% 120% at 100% 0%,#5a2350 0%,transparent 50%),radial-gradient(130% 120% at 50% 130%,#2a1e57 0%,transparent 58%),linear-gradient(135deg,#161a2e,#241526);">
+          <div style="position:absolute;left:30px;top:30px;width:600px;height:480px;border-radius:14px;display:flex;flex-direction:column;padding:13px 13px 0;background:rgba(38,38,43,0.62);backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);border:1px solid rgba(255,255,255,0.1);box-shadow:0 18px 50px -14px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.08);">
+            <div style="display:flex;align-items:center;gap:9px;height:40px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,0.1);border:1px solid #0A84FF;box-shadow:0 0 0 3px rgba(10,132,255,0.22);">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.4" stroke="#a0a0a6" stroke-width="1.5"/><line x1="10.4" y1="10.4" x2="14" y2="14" stroke="#a0a0a6" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span style="flex:1;font-size:14.5px;color:#f5f5f7;">invoice<span style="display:inline-block;width:1.5px;height:16px;background:#0A84FF;margin-left:1px;vertical-align:-3px;"></span></span>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="#1c1c1e" stroke-width="1.6" stroke-linecap="round"><path d="M2.6 2.6l4.8 4.8M7.4 2.6l-4.8 4.8"/></svg></span>
+            </div>
+            <div style="display:flex;gap:8px;padding:12px 2px 13px;">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:600;background:#0A84FF;color:#fff;">全部</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.09);color:#d1d1d6;cursor:pointer;" style-hover="background:rgba(255,255,255,0.15);">文本</span>
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 14px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(255,255,255,0.09);color:#d1d1d6;cursor:pointer;" style-hover="background:rgba(255,255,255,0.15);">图片</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding-bottom:34px;">
+              <svg width="46" height="46" viewBox="0 0 48 48" fill="none" stroke="#5a5a62" stroke-width="2.4" style="margin-bottom:18px;"><circle cx="21" cy="21" r="13"/><line x1="30.5" y1="30.5" x2="40" y2="40" stroke-linecap="round"/><line x1="13.5" y1="28.5" x2="28.5" y2="13.5" stroke-linecap="round"/></svg>
+              <span style="font-size:17px;font-weight:500;color:#b0b0b6;">未找到<span style="font-weight:700;color:#3a9bff;">「invoice」</span>相关记录</span>
+              <span style="font-size:13.5px;color:#98989f;max-width:300px;text-align:center;line-height:1.5;margin-top:7px;">试试更换关键词，或切换到其他筛选类型</span>
+              <span style="font-size:13.5px;font-weight:500;color:#3a9bff;margin-top:18px;cursor:pointer;">清除搜索</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
