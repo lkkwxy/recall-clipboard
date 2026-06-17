@@ -60,6 +60,9 @@ final class ClipboardMonitor {
         let sourceApp = app?.localizedName
         let bundleID = app?.bundleIdentifier
 
+        // 用户排除的来源应用：不记录。
+        if let bundleID, settings.excludedBundleIDs.contains(bundleID) { return }
+
         // 优先级：图片 > 文本（图片复制有时会同时带文件名文本）。
         if settings.saveImages, let image = readImage(from: pb) {
             store.saveImage(image, sourceApp: sourceApp, bundleID: bundleID)

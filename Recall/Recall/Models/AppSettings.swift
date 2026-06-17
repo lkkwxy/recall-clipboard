@@ -46,6 +46,13 @@ final class AppSettings: ObservableObject {
     @Published var appearance: AppearanceMode {
         didSet { defaults.set(appearance.rawValue, forKey: Keys.appearance) }
     }
+    /// 被排除的来源应用，命中其 bundleID 的复制不记录。默认空 = 不过滤。
+    @Published var excludedApps: [ExcludedApp] {
+        didSet { defaults.set(try? JSONEncoder().encode(excludedApps), forKey: Keys.excludedApps) }
+    }
+
+    /// 排除名单的 bundleID 集合，供监听时快速命中判断。
+    var excludedBundleIDs: Set<String> { Set(excludedApps.map(\.bundleID)) }
 
     init() {
         if let path = defaults.string(forKey: Keys.rootPath) {
@@ -60,6 +67,12 @@ final class AppSettings: ObservableObject {
         autoCleanDays = defaults.object(forKey: Keys.autoCleanDays) as? Int ?? 30
         appearance = AppearanceMode(rawValue: defaults.string(forKey: Keys.appearance) ?? "")
             ?? .system
+        if let data = defaults.data(forKey: Keys.excludedApps),
+           let apps = try? JSONDecoder().decode([ExcludedApp].self, from: data) {
+            excludedApps = apps
+        } else {
+            excludedApps = []
+        }
     }
 
     private enum Keys {
@@ -69,5 +82,6 @@ final class AppSettings: ObservableObject {
         static let historyLimit = "historyLimit"
         static let autoCleanDays = "autoCleanDays"
         static let appearance = "appearance"
+        static let excludedApps = "excludedApps"
     }
 }

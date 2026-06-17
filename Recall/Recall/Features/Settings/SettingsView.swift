@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import UniformTypeIdentifiers
 import KeyboardShortcuts
 
 struct SettingsView: View {
@@ -62,6 +63,31 @@ struct SettingsView: View {
             }
 
             Section {
+                if settings.excludedApps.isEmpty {
+                    Text("未排除任何应用，记录全部来源的复制")
+                        .font(.caption).foregroundStyle(.secondary)
+                } else {
+                    ForEach(settings.excludedApps) { app in
+                        HStack(spacing: 8) {
+                            Image(nsImage: icon(for: app.bundleID))
+                                .resizable().frame(width: 18, height: 18)
+                            Text(app.name)
+                            Spacer()
+                            Button {
+                                settings.excludedApps.removeAll { $0.bundleID == app.bundleID }
+                            } label: {
+                                Image(systemName: "minus.circle.fill").foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.borderless)
+                        }
+                    }
+                }
+                Button("添加应用…", action: addExcludedApps)
+            } header: {
+                Text("不记录来自这些应用的复制")
+            }
+
+            Section {
                 Picker("历史上限", selection: $settings.historyLimit) {
                     ForEach(Self.historyOptions, id: \.value) { Text($0.label).tag($0.value) }
                 }
@@ -91,6 +117,35 @@ struct SettingsView: View {
         .onAppear { recomputeUsage() }
         .onChange(of: settings.historyLimit) { _ in applyCleanup() }
         .onChange(of: settings.autoCleanDays) { _ in applyCleanup() }
+    }
+
+    private func addExcludedApps() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = true
+        panel.allowedContentTypes = [.application]
+        panel.directoryURL = URL(fileURLWithPath: "/Applications")
+        panel.prompt = "添加"
+        panel.message = "选择要排除的应用，来自它们的复制将不被记录"
+        guard panel.runModal() == .OK else { return }
+
+        var existing = settings.excludedBundleIDs
+        for url in panel.urls {
+            guard let bundleID = Bundle(url: url)?.bundleIdentifier,
+                  !existing.contains(bundleID) else { continue }
+            let name = FileManager.default.displayName(atPath: url.path)
+            settings.excludedApps.append(ExcludedApp(bundleID: bundleID, name: name))
+            existing.insert(bundleID)
+        }
+    }
+
+    /// 由 bundleID 取应用图标；定位不到时退回通用应用图标。
+    private func icon(for bundleID: String) -> NSImage {
+        if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
+            return NSWorkspace.shared.icon(forFile: url.path)
+        }
+        return NSWorkspace.shared.icon(for: .applicationBundle)
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {
