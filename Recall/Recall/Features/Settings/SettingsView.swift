@@ -108,6 +108,7 @@ struct SettingsView: View {
                 } label: {
                     Text("已使用 \(byteString(usedBytes)) 本地存储")
                 }
+                Button("清空全部历史…", role: .destructive, action: clearAllHistory)
             }
         }
         .formStyle(.grouped)
@@ -157,6 +158,18 @@ struct SettingsView: View {
             alert.informativeText = error.localizedDescription
             alert.runModal()
         }
+    }
+
+    private func clearAllHistory() {
+        let confirm = NSAlert()
+        confirm.alertStyle = .critical
+        confirm.messageText = "清空全部历史记录？"
+        confirm.informativeText = "将永久删除所有已保存的文本与图片记录，此操作不可撤销。"
+        confirm.addButton(withTitle: "清空")
+        confirm.addButton(withTitle: "取消")
+        guard confirm.runModal() == .alertFirstButtonReturn else { return }
+        appState.clearAll()
+        recomputeUsage()
     }
 
     private func applyCleanup() {

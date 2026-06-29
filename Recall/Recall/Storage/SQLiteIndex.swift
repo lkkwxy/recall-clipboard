@@ -95,6 +95,11 @@ final class SQLiteIndex {
         sqlite3_step(stmt)
     }
 
+    /// 清空所有索引记录。
+    func deleteAll() {
+        try? exec("DELETE FROM clips;")
+    }
+
     // MARK: - 查询
 
     /// 最近一条记录的内容哈希，用于跳过连续重复复制。

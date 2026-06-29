@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import KeyboardShortcuts
 
 @MainActor
 final class MenuBarController: NSObject, NSMenuDelegate {
@@ -59,8 +60,8 @@ final class MenuBarController: NSObject, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        let openPanel = NSMenuItem(title: "打开历史面板", action: #selector(openPanel), keyEquivalent: "v")
-        openPanel.keyEquivalentModifierMask = [.option]
+        let openPanel = NSMenuItem(title: "打开历史面板", action: #selector(openPanel), keyEquivalent: "")
+        openPanel.setShortcut(for: .toggleHistoryPanel)  // 跟随用户在设置里改的快捷键显示
         openPanel.target = self
         menu.addItem(openPanel)
 

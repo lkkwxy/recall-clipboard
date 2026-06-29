@@ -66,6 +66,12 @@ final class AppState: ObservableObject {
         revision += 1
     }
 
+    /// 清空全部历史记录。
+    func clearAll() {
+        store.clearAll()
+        revision += 1
+    }
+
     /// 更改保存文件夹（含数据迁移）。失败抛出，调用方负责提示。
     func changeRoot(to newRoot: URL) throws {
         try store.migrate(to: newRoot)

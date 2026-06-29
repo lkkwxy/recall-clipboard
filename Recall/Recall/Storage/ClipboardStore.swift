@@ -108,6 +108,17 @@ final class ClipboardStore {
         index.delete(id: item.id)
     }
 
+    /// 清空全部历史：删除 texts/ images/ 下所有正文与图片文件，并清空索引。
+    /// 只动本应用在保存文件夹内管理的数据。
+    func clearAll() {
+        let fm = FileManager.default
+        for dir in [textsURL, imagesURL] {
+            let files = (try? fm.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil)) ?? []
+            for url in files { try? fm.removeItem(at: url) }
+        }
+        index.deleteAll()
+    }
+
     /// 按配置清理：超过条数上限的旧记录 + 早于保留天数的记录。
     /// 只删除本应用在保存文件夹内管理的文件。
     func enforceLimits(keepLimit: Int, autoCleanDays: Int) {

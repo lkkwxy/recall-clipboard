@@ -54,6 +54,17 @@ final class AppSettings: ObservableObject {
     /// 排除名单的 bundleID 集合，供监听时快速命中判断。
     var excludedBundleIDs: Set<String> { Set(excludedApps.map(\.bundleID)) }
 
+    /// 是否曾经启动过。用于区分「全新首次启动」。
+    var hasLaunchedBefore: Bool {
+        get { defaults.bool(forKey: Keys.hasLaunchedBefore) }
+        set { defaults.set(newValue, forKey: Keys.hasLaunchedBefore) }
+    }
+    /// 上次启动时记录的系统启动时刻（kern.boottime，秒），用于判断本次是否「开机后第一次启动」。
+    var lastSeenBootTime: Double {
+        get { defaults.double(forKey: Keys.lastSeenBootTime) }
+        set { defaults.set(newValue, forKey: Keys.lastSeenBootTime) }
+    }
+
     init() {
         if let path = defaults.string(forKey: Keys.rootPath) {
             rootURL = URL(fileURLWithPath: path, isDirectory: true)
@@ -83,5 +94,7 @@ final class AppSettings: ObservableObject {
         static let autoCleanDays = "autoCleanDays"
         static let appearance = "appearance"
         static let excludedApps = "excludedApps"
+        static let hasLaunchedBefore = "hasLaunchedBefore"
+        static let lastSeenBootTime = "lastSeenBootTime"
     }
 }
